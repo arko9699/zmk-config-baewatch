@@ -1,0 +1,15 @@
+file_format: "1"
+id: b4e
+name: baewatch
+type: board
+arch: arm
+
+# Set this to a URL that documents the keyboard.
+url: https://example.com
+
+features:
+  - keys
+  - studio
+outputs:
+  - usb
+  - ble

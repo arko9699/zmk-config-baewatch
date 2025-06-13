@@ -1,0 +1,108 @@
+/dts-v1/;
+#include <nordic/nrf52840_qiaa.dtsi>
+#include <dt-bindings/zmk/matrix_transform.h>
+
+#include "b4e-pinctrl.dtsi"
+#include "b4e-layouts.dtsi"
+
+/ {
+    model = "baewatch";
+    compatible = "b4e";
+
+    chosen {
+        zephyr,code-partition = &code_partition;
+        zephyr,console = &cdc_acm_uart;
+        zephyr,sram = &sram0;
+        zephyr,flash = &flash0;
+        zmk,battery = &vbatt;
+        zmk,physical-layout = &default_layout;
+    };
+
+    kscan: kscan {
+        compatible = "zmk,kscan-gpio-direct";
+        wakeup-source;
+        input-gpios
+            = <&gpio0 9 GPIO_ACTIVE_LOW | GPIO_PULL_UP>
+            , <&gpio0 10 GPIO_ACTIVE_LOW | GPIO_PULL_UP>
+            ;
+    };
+
+    default_transform: default_transform {
+        compatible = "zmk,matrix-transform";
+        columns = <1>;
+        rows = <2>;
+
+        map = <
+            RC(0, 0)
+            RC(0, 1)
+        >;
+    };
+
+    
+    // Powering the SoC from the VDDH pin
+    vbatt: vbatt {
+        compatible = "zmk,battery-nrf-vddh";
+    };
+};
+
+&adc {
+    status = "okay";
+};
+
+&gpiote {
+    status = "okay";
+};
+
+&gpio0 {
+    status = "okay";
+};
+
+&gpio1 {
+    status = "okay";
+};
+
+&uart0 {
+    compatible = "nordic,nrf-uarte";
+    current-speed = <115200>;
+    pinctrl-0 = <&uart0_default>;
+    pinctrl-1 = <&uart0_sleep>;
+    pinctrl-names = "default", "sleep";
+};
+
+zephyr_udc0: &usbd {
+    status = "okay";
+};
+
+&flash0 {
+    partitions {
+        compatible = "fixed-partitions";
+        #address-cells = <1>;
+        #size-cells = <1>;
+
+        code_partition: partition@1000 {
+            reg = <DT_SIZE_K(4) DT_SIZE_K(844)>;
+        };
+
+        // If using a bootloader with SoftDevice included, replace the code_partition
+        // node above with the following. If using SoftDevice v7, change 26000 to 27000.
+
+        // sd_partition: partition@0 {
+        //     reg = <0x0 <DT_SIZE_K(4)>;
+        // };
+        // code_partition: partition@26000 {
+        //     reg = <DT_SIZE_K(152) DT_SIZE_K(792)>;
+        // };
+
+        // The flash starting at 0x000d4000 and ending at
+        // 0x000f3fff is reserved for use by the application.
+
+        // Storage partition will be used by NVS if enabled.
+        storage_partition: partition@d4000 {
+            reg = <DT_SIZE_K(848) DT_SIZE_K(128)>;
+        };
+
+        boot_partition: partition@f4000 {
+            reg = <DT_SIZE_K(976) DT_SIZE_K(48)>;
+        };
+    };
+};
