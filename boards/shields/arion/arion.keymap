@@ -8,7 +8,7 @@
 		compatible = "zmk,keymap";
 
 		default_layer {
-            display-name = "Base";
+            
 			bindings = <
 		        &kp ESC                                                  &kp SPACE
                 &ext_power EP_ON    &ext_power EP_OFF   &kp N3           &kp BSPC      
@@ -22,7 +22,7 @@
 		};
 
 		right {
-            display-name = "Right";
+            
 			bindings = <
 		        &kp ESC                                                  &kp SPACE
                 &ext_power EP_ON    &ext_power EP_OFF   &kp N3           &kp BSPC      
@@ -34,7 +34,7 @@
 		};
 
 		left {
-            display-name = "Left";
+            
 			bindings = <
 		        &kp ESC                                                  &kp SPACE
                 &ext_power EP_ON    &ext_power EP_OFF   &kp N3           &kp BSPC      
@@ -46,7 +46,7 @@
 		};
 
 		control {
-            display-name = "Control";
+            
 			bindings = <
 		        &kp ESC                                                  &kp SPACE
                 &ext_power EP_ON    &ext_power EP_OFF   &kp N3           &kp BSPC      
