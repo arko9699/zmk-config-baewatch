@@ -22,7 +22,6 @@
 		};
 
 		right {
-            
 			bindings = <
 		        &kp ESC                                                  &kp SPACE
                 &ext_power EP_ON    &ext_power EP_OFF   &kp N3           &kp BSPC      
@@ -34,7 +33,6 @@
 		};
 
 		left {
-            
 			bindings = <
 		        &kp ESC                                                  &kp SPACE
                 &ext_power EP_ON    &ext_power EP_OFF   &kp N3           &kp BSPC      
@@ -46,14 +44,13 @@
 		};
 
 		control {
-            
 			bindings = <
 		        &kp ESC                                                  &kp SPACE
                 &ext_power EP_ON    &ext_power EP_OFF   &kp N3           &kp BSPC      
                 &rgb_ug RGB_EFF     &rgb_ug RGB_TOG     &rgb_ug RGB_EFR   
                 &kp N4              &kp N5              &kp N6           &kp MINUS 
                 &kp N1              &kp N2              &kp N3 
-                &kp N0              &kp GRAVE           &kp ENTER
+                &kp N0                                  &kp GRAVE        &kp ENTER
 			>;
 		};
 	};
